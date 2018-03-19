@@ -75,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
         else if (!_jump && IsGrounded() && _inputManager.jump())
         {
             StartCoroutine(Jump());
-            //Jump();
         }
         _moveVector = new Vector2(_moveSpeedCurrent, _jumpForceCurrent);
         _rigidbody.velocity = _moveVector/* * Time.deltaTime*/;
@@ -101,6 +100,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _moveSpeedCurrent = _SpeedMax;
         }
+    }
+    private void LeftDodge()
+    {
+
+    }
+    private void RightDodge()
+    {
+
     }
     private void ResetJump()
     {
