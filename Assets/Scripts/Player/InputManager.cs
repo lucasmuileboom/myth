@@ -29,4 +29,12 @@ public class InputManager : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.M);
     }
+    public bool rangeAttack()
+    {
+        return Input.GetKeyDown(KeyCode.K);
+    }
+    public bool holdRangeAttack()
+    {
+        return Input.GetKey(KeyCode.K);
+    }
 }

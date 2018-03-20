@@ -9,12 +9,12 @@ public class Camera_Follow : MonoBehaviour
     private Vector3 offset;
     [SerializeField]
     private Vector3 extra;
-    [SerializeField]
-    private GameObject target;
     private bool reach = false;
     private bool low = false;
     private bool bossCamera = false;
     private Camera mainCamera;
+    public float shakeTimer;
+    public float shakeAmout;
 
     void Start()
     {
@@ -25,6 +25,12 @@ public class Camera_Follow : MonoBehaviour
     void Update()
     {
         Follow();
+        if (shakeTimer >= 0)
+        {
+            Vector2 shakePos = Random.insideUnitCircle * shakeAmout;
+            transform.position = new Vector3(transform.position.x + shakePos.x, transform.position.y + shakePos.y, transform.position.z);
+            shakeTimer -= Time.deltaTime;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -51,7 +57,7 @@ void Follow()
         }
         else if (reach && !bossCamera)
         {
-            this.transform.position = new Vector3(player.transform.position.x + 10f, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(player.transform.position.x + extra.x, this.transform.position.y, this.transform.position.z);
             if (this.transform.position.y > player.transform.position.y)
             {
                 reach = false;
@@ -59,7 +65,7 @@ void Follow()
         }
         else if (low && !bossCamera)
         {
-            this.transform.position = new Vector3(player.transform.position.x + 10f, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(player.transform.position.x + extra.x, this.transform.position.y, this.transform.position.z);
             if(this.transform.position.y < player.transform.position.y)
             {
                 low = false;
@@ -68,8 +74,12 @@ void Follow()
         if (bossCamera)
         {
             mainCamera.enabled = true;
-            //mainCamera.orthographicSize = 10f;
             mainCamera.orthographicSize = Mathf.Lerp(mainCamera.orthographicSize, 10f, 0.2f);
         }
+    }
+    public void ShakeCamera(float shakePwr, float shakeDur)
+    {
+        shakeAmout = shakePwr;
+        shakeTimer = shakeDur;
     }
 }
