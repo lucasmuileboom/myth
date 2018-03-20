@@ -52,7 +52,7 @@ public class PlayerAttack : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Attacks[i].Range, enemysLayer);
             if (hit.collider != null)
             {
-                hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(Attacks[i].Damage);
+                hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(Attacks[i].Damage, direction);
                 print("hit");
             }
             else

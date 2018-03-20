@@ -34,7 +34,7 @@ public class EnemyAttack : MonoBehaviour
         if (_collisionTime >= _collisionTimer)
         {
             Debug.Log("Attacking NOW");
-            //other.TakeDamage(_damage);
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(_damage);
             _collisionTime = 0;
         }
     }
