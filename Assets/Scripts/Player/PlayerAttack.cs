@@ -63,10 +63,6 @@ public class PlayerAttack : MonoBehaviour
             }
             if (melee)
             {
-<<<<<<< HEAD
-                hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(Attacks[i].Damage, direction);
-                print("hit");
-=======
                 Debug.DrawRay(transform.position, direction * Attacks[i].Range, Color.red);
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Attacks[i].Range, _enemysLayer);
                 if (hit.collider != null)
@@ -79,7 +75,6 @@ public class PlayerAttack : MonoBehaviour
                     print("miss");
                 }
                 _timer = Attacks[i].FireRate;
->>>>>>> b33740416300dcd8d9c7e949200548a893ae1ede
             }
             else
             {

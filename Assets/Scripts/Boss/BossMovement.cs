@@ -16,11 +16,10 @@ public class BossMovement : MonoBehaviour
     [SerializeField]private float _rescaleValue;
     [SerializeField]private bool _active;
     [SerializeField]private bool _resting;
-    [SerializeField]private int _restTimer;
     [SerializeField]private bool _clearEnemies;
     private bool _moving;
     private bool _started;
-    private Vector2 _pos;
+    private Vector3 _pos;
     private GameObject _player;
     private GameObject[] _platforms;
 
@@ -61,15 +60,19 @@ public class BossMovement : MonoBehaviour
             }
         }
     }
-
+/*
     void LateUpdate()
     {
         if (!_moving && _speed == 0)
         {
-            transform.position = _pos;
+            if (transform.position != _pos)
+            {
+                transform.position = _pos;
+            }
+            
         }
     }
-
+*/
     void MoveBoss()
     {
         Debug.Log("Test1");
@@ -84,7 +87,7 @@ public class BossMovement : MonoBehaviour
             {
                 _speed += _acceleration;
             }
-            transform.Translate(Vector2.left * _speed);
+            transform.position -= new Vector3(_speed, 0f);
         }
     }
 
@@ -135,6 +138,9 @@ public class BossMovement : MonoBehaviour
 
     public void SlowDown()
     {
-        _speed -= _acceleration * 15;
+        if (_speed > 0 && !_moving)
+        {
+            _speed -= _acceleration * 50;
+        }
     }
 }
