@@ -40,9 +40,13 @@ public class Camera_Follow : MonoBehaviour
         {
             _low = true;
         }
-        if(other.gameObject.tag == "BossRoom")
+        if (other.gameObject.tag == "BossRoom")
         {
             _bossCamera = true;
+        }
+        if (other.gameObject.tag == "player" && _boss.GetComponent<enemyHealth>()._health == 0f)
+        {
+            _bossCamera = false;
         }
     }
 
@@ -51,10 +55,14 @@ public class Camera_Follow : MonoBehaviour
         if (!_reach && !_bossCamera)
         {
             this.transform.position = _player.transform.position + _offset;
+            _mainCamera.enabled = true;
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 5f, 0.2f);
         }
         else if (_reach && !_bossCamera)
         {
             this.transform.position = new Vector3(_player.transform.position.x + _extra.x, this.transform.position.y, this.transform.position.z);
+            _mainCamera.enabled = true;
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 5f, 0.2f);
             if (this.transform.position.y > _player.transform.position.y)
             {
                 _reach = false;
@@ -63,7 +71,9 @@ public class Camera_Follow : MonoBehaviour
         else if (_low && !_bossCamera)
         {
             this.transform.position = new Vector3(_player.transform.position.x + _extra.x, this.transform.position.y, this.transform.position.z);
-            if(this.transform.position.y < _player.transform.position.y)
+            _mainCamera.enabled = true;
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 5f, 0.2f);
+            if (this.transform.position.y < _player.transform.position.y)
             {
                 _low = false;
             }
