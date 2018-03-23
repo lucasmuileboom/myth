@@ -8,22 +8,23 @@ using UnityEngine;
 
 public class BossMovement : MonoBehaviour
 {
-    [SerializeField]private float _speed;
-    [SerializeField]private float _acceleration;
-    [SerializeField]private float _minSpeed;
-    [SerializeField]private float _maxSpeed;
-    [SerializeField]private float _slowDown;
-    [SerializeField]private float _rescaleValue;
-    [SerializeField]private bool _active;
-    [SerializeField]private bool _resting;
-    [SerializeField]private bool _clearEnemies;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _acceleration;
+    [SerializeField] private float _minSpeed;
+    [SerializeField] private float _maxSpeed;
+    [SerializeField] private float _slowDown;
+    [SerializeField] private float _rescaleValue;
+    [SerializeField] private int _attackTime;
+    [SerializeField] private int _attackTimeMax;
+    [SerializeField] private bool _active;
+    [SerializeField] private bool _resting;
+    [SerializeField] private bool _clearEnemies;
     private bool _moving;
     private bool _started;
     private Vector3 _pos;
     private GameObject _player;
     private GameObject[] _platforms;
-
-
+    private BossAttack _bossAttack;
 
     // Use this for initialization
     void Start()
@@ -41,6 +42,7 @@ public class BossMovement : MonoBehaviour
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), _platforms[i].GetComponent<Collider2D>());
         }
+        _bossAttack = GetComponent<BossAttack>();
     }
 
     // Update is called once per frame
@@ -60,34 +62,29 @@ public class BossMovement : MonoBehaviour
             }
         }
     }
-/*
-    void LateUpdate()
-    {
-        if (!_moving && _speed == 0)
-        {
-            if (transform.position != _pos)
-            {
-                transform.position = _pos;
-            }
-            
-        }
-    }
-*/
+
     void MoveBoss()
     {
-        Debug.Log("Test1");
         if (_moving)
         {
-            Debug.Log("Test2");
-            if (!_resting && _speed < _minSpeed)
+            if (!_resting)
             {
-                _speed = _minSpeed;
+                _attackTime++;
+                if (_speed < _minSpeed)
+                {
+                    _speed = _minSpeed;
+                }
             }
             if (_speed < _maxSpeed)
             {
                 _speed += _acceleration;
             }
             transform.position -= new Vector3(_speed, 0f);
+        }
+        if (_attackTime >= _attackTimeMax)
+        {
+            _bossAttack.StartCoroutine(_bossAttack.Attack());
+            _attackTime = 0;
         }
     }
 
@@ -96,7 +93,7 @@ public class BossMovement : MonoBehaviour
         _active = true;
     }
 
-    public void ClearEnemies()
+    void ClearEnemies()
     {
         GameObject[] a = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < a.Length; i++)

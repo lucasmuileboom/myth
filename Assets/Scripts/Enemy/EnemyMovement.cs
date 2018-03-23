@@ -8,20 +8,30 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float _moveSpeed = 0;
-    private float _moveSpeedMax = 0.2f;
-    private bool _allowLeft = false;
-    private bool _allowRight = false;
-    private int _randomMove;
-    private int _moveTimer = 0;
+    [Header("GameObjects")]
     private GameObject _player;
-    private bool _playerInRange = false;
+
+    [Header("Components")]
+    private Rigidbody2D _rb;
+
+    [Header("Ints & Floats")]
+    [SerializeField]
     private int _moveDirection;
     [SerializeField]
-    private int _attackDistance = 10;
-    private Rigidbody2D _rb;
+    private int _randomMove, _moveTimer, _attackDistance;
+    [SerializeField]
+    private float _moveSpeed, _moveSpeedMax, _scaleMultiplier;
+
+    [Header("Bools")]
+    [SerializeField]
+    private bool _allowLeft;
+    [SerializeField]
+    private bool _allowRight, _playerInRange, _abovePlatform;  
+
+    [Header("Vectors")]
+    [SerializeField]
     private Vector2 _position;
-    private bool _abovePlatform = true;
+    
 
 	// Use this for initialization
 	void Start ()
@@ -81,7 +91,7 @@ public class EnemyMovement : MonoBehaviour
                     {
                         if (_moveSpeed > -_moveSpeedMax)
                         {
-                            _moveSpeed = Mathf.Lerp(_moveSpeed, -_moveSpeedMax, 0.01f);
+                            _moveSpeed = Mathf.Lerp(_moveSpeed, -_moveSpeedMax * _scaleMultiplier, 0.01f);
                         }
                     }
                     else
@@ -94,7 +104,7 @@ public class EnemyMovement : MonoBehaviour
                     {
                         if (_moveSpeed < _moveSpeedMax)
                         {
-                            _moveSpeed = Mathf.Lerp(_moveSpeed, _moveSpeedMax, 0.01f);
+                            _moveSpeed = Mathf.Lerp(_moveSpeed, _moveSpeedMax * _scaleMultiplier, 0.01f);
                         }
                     }
                     else

@@ -7,6 +7,8 @@ TagManager:
   - ground
   - Platform
   - Enemy
+  - Boss
+  - BossTrigger
   layers:
   - Default
   - TransparentFX
