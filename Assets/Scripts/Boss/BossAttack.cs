@@ -9,7 +9,6 @@ public class BossAttack : MonoBehaviour {
 
     public IEnumerator Attack()
     {
-        print("Attacking!");
         for (int i = 0; i < _duration; i++)
         {
             _attackBox.transform.Translate(Vector3.left * 0.8f);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This script will manage the movement of the boss, which includes resting every now and then and being able to be slowed down
+/// This script will manage the movement of the boss, which includes resting every now and then, and being able to be slowed down
 /// </summary>
 
 public class BossMovement : MonoBehaviour
@@ -21,8 +21,6 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private bool _clearEnemies;
     private bool _moving;
     private bool _started;
-    private Vector3 _pos;
-    private GameObject _player;
     private GameObject[] _platforms;
     private BossAttack _bossAttack;
 
@@ -35,8 +33,6 @@ public class BossMovement : MonoBehaviour
         _minSpeed *= _rescaleValue;
         _maxSpeed *= _rescaleValue;
         _slowDown *= _rescaleValue;
-
-        _player = GameObject.FindGameObjectWithTag("Player");
         _platforms = GameObject.FindGameObjectsWithTag("Platform");
         for (int i = 0; i < _platforms.Length; i++)
         {
@@ -48,7 +44,6 @@ public class BossMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _pos = transform.position;
         if (_active)
         {
             if (_clearEnemies)
@@ -105,7 +100,6 @@ public class BossMovement : MonoBehaviour
 
     IEnumerator Startup()
     {
-        Debug.Log("Starting Up!");
         _started = true;
         _resting = false;
         yield return new WaitForSeconds(1f);
@@ -116,7 +110,6 @@ public class BossMovement : MonoBehaviour
 
     IEnumerator Rest()
     {
-        Debug.Log("Resting");
         _resting = true;
         _moving = false;
         while (_speed > 0)

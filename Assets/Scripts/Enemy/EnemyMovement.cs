@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This script will determine the movement of the enemy
+/// This script will determine the movement of the enemy,
+/// which includes checking the floor underneath, checking
+/// whether it touches a wall and measuring distance between
+/// itself and the player
 /// </summary>
 
 public class EnemyMovement : MonoBehaviour
@@ -16,22 +19,27 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Ints & Floats")]
     [SerializeField]
-    private int _moveDirection;
+    private int _playerDirection;
     [SerializeField]
-    private int _randomMove, _moveTimer, _attackDistance;
+    private int _randomMove,
+    _moveTimer,
+    _attackDistance;
     [SerializeField]
-    private float _moveSpeed, _moveSpeedMax, _scaleMultiplier;
+    private float _moveSpeed,
+    _moveSpeedMax,
+    _scaleMultiplier;
 
     [Header("Bools")]
     [SerializeField]
     private bool _allowLeft;
     [SerializeField]
-    private bool _allowRight, _playerInRange, _abovePlatform;  
+    private bool _allowRight,
+    _playerInRange,
+    _abovePlatform;  
 
     [Header("Vectors")]
     [SerializeField]
     private Vector2 _position;
-    
 
 	// Use this for initialization
 	void Start ()
@@ -46,11 +54,11 @@ public class EnemyMovement : MonoBehaviour
         _position = transform.position;
         if (_player.transform.position.x < transform.position.x)
         {
-            _moveDirection = -1;
+            _playerDirection = -1;
         }
         else
         {
-            _moveDirection = 1;
+            _playerDirection = 1;
         }
         if (_moveTimer > 90)
         {
@@ -67,19 +75,19 @@ public class EnemyMovement : MonoBehaviour
         }
         if (_playerInRange)
         {
-            if (!_allowLeft && _moveDirection == -1)
+            if (!_allowLeft && _playerDirection == -1)
             {
                 _moveSpeed = 0;
                 transform.position = new Vector2(transform.position.x + 0.02f, transform.position.y);
             }
-            else if (!_allowRight && _moveDirection == 1)
+            else if (!_allowRight && _playerDirection == 1)
             {
                 _moveSpeed = 0;
                 transform.position = new Vector2(transform.position.x - 0.02f, transform.position.y);
             }
             else
             {
-                _moveSpeed = Mathf.Lerp(_moveSpeed, _moveDirection * _moveSpeedMax * 1.5f, 0.01f);
+                _moveSpeed = Mathf.Lerp(_moveSpeed, _playerDirection * _moveSpeedMax * 1.5f, 0.01f);
             }
         }
         else
@@ -179,7 +187,6 @@ public class EnemyMovement : MonoBehaviour
         }
         _moveTimer++;
     }
-
 
     void LateUpdate()
     {

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField]
-    private int _health;
+    public int health;
     [SerializeField]
     private int _knockback;
     private Rigidbody2D _rb;
@@ -38,8 +37,8 @@ public class EnemyHealth : MonoBehaviour
         {
             GetComponent<BossMovement>().SlowDown();
         }
-        _health -= damage;
-        if (_health <= 0)
+        health -= damage;
+        if (health <= 0)
         {
             Destroy(this.gameObject);
         }

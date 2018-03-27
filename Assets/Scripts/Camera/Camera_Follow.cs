@@ -40,11 +40,11 @@ public class Camera_Follow : MonoBehaviour
         {
             _low = true;
         }
-        if (other.gameObject.tag == "BossRoom")
+        if (other.gameObject.tag == "BossTrigger")
         {
             _bossCamera = true;
         }
-        if (other.gameObject.tag == "player" && _boss.GetComponent<enemyHealth>()._health == 0f)
+        if (other.gameObject.tag == "player" && _boss.GetComponent<EnemyHealth>().health == 0f)
         {
             _bossCamera = false;
         }
@@ -80,9 +80,9 @@ public class Camera_Follow : MonoBehaviour
         }
         if (_bossCamera)
         {
-            this.transform.position = new Vector3(_boss.transform.position.x, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(_boss.transform.position.x - _extra.x, this.transform.position.y, this.transform.position.z);
             _mainCamera.enabled = true;
-            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 10f, 0.2f);
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 15f, 0.2f);
         }
     }
 
