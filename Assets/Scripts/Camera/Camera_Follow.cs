@@ -14,8 +14,6 @@ public class Camera_Follow : MonoBehaviour
     private bool _low = false;
     private bool _bossCamera = false;
     private Camera _mainCamera;
-    public float shakeTimer;
-    public float shakeAmout;
 
     void Start()
     {
@@ -27,11 +25,11 @@ public class Camera_Follow : MonoBehaviour
     void Update()
     {
         Follow();
-        ShakeTimer();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        //Checks the collision triggers and changes the bools to true or false
         if (other.gameObject.tag == "Max_Height")
         {
             _reach = true;
@@ -51,7 +49,7 @@ public class Camera_Follow : MonoBehaviour
     }
 
     void Follow()
-    {
+    {//Decides what the camera is following and keeps the camera within the levels boundries
         if (!_reach && !_bossCamera)
         {
             this.transform.position = _player.transform.position + _offset;
@@ -84,21 +82,5 @@ public class Camera_Follow : MonoBehaviour
             _mainCamera.enabled = true;
             _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 15f, 0.2f);
         }
-    }
-
-    public void ShakeTimer()
-    {
-        if (shakeTimer >= 0)
-        {
-            Vector2 shakePos = Random.insideUnitCircle * shakeAmout;
-            transform.position = new Vector3(transform.position.x + shakePos.x, transform.position.y + shakePos.y, transform.position.z);
-            shakeTimer -= Time.deltaTime;
-        }
-    }
-
-    public void ShakeCamera(float shakePwr, float shakeDur)
-    {
-        shakeAmout = shakePwr;
-        shakeTimer = shakeDur;
     }
 }

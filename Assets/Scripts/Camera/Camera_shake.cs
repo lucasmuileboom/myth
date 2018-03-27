@@ -8,14 +8,16 @@ public class Camera_shake : MonoBehaviour {
     public float shakeAmout;
 
     private void Update()
-    {
+    {//Calls the ShakeTimer function
         ShakeTimer();
+        //Is for tests can be deleted
         if (Input.GetButtonDown("Fire1"))
         {
             ShakeCamera(1,0.2f);
         }
     }
 
+    //Controls the camera shake and put's a timer on it
     public void ShakeTimer()
     {
         if (shakeTimer >= 0)
@@ -26,6 +28,7 @@ public class Camera_shake : MonoBehaviour {
         }
     }
 
+    //Gives the perameters to the ShakeTimer function an is the call function, meaning this is the funcion that you call to shake the camera
     public void ShakeCamera(float shakePwr, float shakeDur)
     {
         shakeAmout = shakePwr;
