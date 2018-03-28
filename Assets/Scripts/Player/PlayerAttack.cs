@@ -24,7 +24,6 @@ public class PlayerAttack : MonoBehaviour
     private float _timer = 0;
     private float _projectileSpeed;
     private float _projectileDamage;
-    
     private bool _chargeAttack;
 
     void Start()

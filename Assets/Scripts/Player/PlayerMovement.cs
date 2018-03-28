@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //dodge moet een cooldown en het moet mischien mana kosten
     private InputManager _inputManager;
     private Rigidbody2D _rigidbody;
     [SerializeField]private LayerMask groundLayer;
     [SerializeField]private int _SpeedMax;
     [SerializeField]private int _Speed;
+    [SerializeField]private int _dodgeSpeed;
+    [SerializeField]private float _dodgeCoolDown;
     [SerializeField]private int _jumpForce;
     [SerializeField]private float maxJumpForce;
     [SerializeField]private int _doubleJumpForce;
@@ -17,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private  Vector2 _jumpReset;
     private float _jumpForceCurrent;
     private float _moveSpeedCurrent;
+    private float _timer;
     private bool  _jump = false;
     private bool _holdjump= false;
     private bool _douleJump = false;
@@ -47,10 +51,17 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        IsGrounded();
         if (!_inputManager.left() && !_inputManager.right() || _inputManager.left() && _inputManager.right())
         {
             Idle();
+        }
+        else if (_inputManager.dodge() && _inputManager.right() && _timer <= 0)
+        {
+            DodgeRight();
+        }
+        else if (_inputManager.dodge() && _inputManager.left() && _timer <= 0)
+        {
+            DodgeLeft();
         }
         else if (_inputManager.left())
         {
@@ -76,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(Jump());
         }
+        _timer -= Time.deltaTime;
         _moveVector = new Vector2(_moveSpeedCurrent, _jumpForceCurrent);
         _rigidbody.velocity = _moveVector/* * Time.deltaTime*/;
     }
@@ -101,13 +113,18 @@ public class PlayerMovement : MonoBehaviour
             _moveSpeedCurrent = _SpeedMax;
         }
     }
-    private void LeftDodge()
+    private void DodgeLeft()
     {
-
+        _isFlipped = true;
+        _timer = _dodgeCoolDown;
+        _moveSpeedCurrent -= _dodgeSpeed;
+        print("dodgeL");
     }
-    private void RightDodge()
+    private void DodgeRight()
     {
-
+        _isFlipped = false;
+        _moveSpeedCurrent += _dodgeSpeed;
+        print("dodgeR");
     }
     private void ResetJump()
     {
