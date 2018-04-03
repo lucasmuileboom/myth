@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //dodge moet een cooldown en het moet mischien mana kosten
     private InputManager _inputManager;
     private Rigidbody2D _rigidbody;
     [SerializeField]private LayerMask groundLayer;
@@ -123,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
     private void DodgeRight()
     {
         _isFlipped = false;
+        _timer = _dodgeCoolDown;
         _moveSpeedCurrent += _dodgeSpeed;
         print("dodgeR");
     }

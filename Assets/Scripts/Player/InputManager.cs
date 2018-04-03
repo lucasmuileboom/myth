@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
-{
+{//moet down nog testen op controller
     public bool left()
     {
         if (Input.GetAxisRaw("Horizontal") < -0.25f || Input.GetKey(KeyCode.A))
@@ -15,6 +15,14 @@ public class InputManager : MonoBehaviour
     public bool right()
     {
         if (Input.GetAxisRaw("Horizontal") > 0.25f || Input.GetKey(KeyCode.D))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool down()
+    {
+        if (Input.GetAxisRaw("Vertical") > 0.25f || Input.GetKeyDown(KeyCode.S))
         {
             return true;
         }
