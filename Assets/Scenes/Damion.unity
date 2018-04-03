@@ -293,11 +293,14 @@ GameObject:
   - component: {fileID: 289679112}
   - component: {fileID: 289679111}
   - component: {fileID: 289679110}
-  - component: {fileID: 289679115}
   - component: {fileID: 289679113}
-  - component: {fileID: 289679114}
   - component: {fileID: 289679109}
+  - component: {fileID: 289679119}
+  - component: {fileID: 289679118}
+  - component: {fileID: 289679117}
   - component: {fileID: 289679116}
+  - component: {fileID: 289679115}
+  - component: {fileID: 289679114}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -305,19 +308,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &289679109
-MonoBehaviour:
+--- !u!61 &289679109
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 289679108}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 102a8ef49f06eb0448f0b30d4e0943de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collisionTimer: 30
-  _damage: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!23 &289679110
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -366,7 +381,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 289679108}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.39, y: 6.7, z: 0}
+  m_LocalPosition: {x: 2.42, y: -2.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -400,47 +415,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 289679108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b9c46bd208daa4db22e336aebeadc9, type: 3}
+  m_Script: {fileID: 11500000, guid: aba05e6db89b09d4a97d68a0f850ab23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerDirection: 0
-  _randomMove: 0
-  _moveTimer: 0
-  _attackDistance: 10
-  _moveSpeed: 0
-  _moveSpeedMax: 0.2
-  _scaleMultiplier: 0
-  _allowLeft: 0
-  _allowRight: 0
-  _playerInRange: 0
-  _abovePlatform: 0
-  _position: {x: 0, y: 0}
---- !u!61 &289679115
-BoxCollider2D:
+--- !u!114 &289679115
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 289679108}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8779ee567ca28b14c890349a52446a7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 0
 --- !u!114 &289679116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 289679108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab501e741e574e42bb0bed23183e4b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &289679117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -451,8 +452,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108990eb041978949bce4d846b6d4dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  _knockback: 2
+  _health: 2
+  _knockback: 0
+--- !u!114 &289679118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 289679108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 102a8ef49f06eb0448f0b30d4e0943de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _collisionTimer: 10
+--- !u!114 &289679119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 289679108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfde8b3282c7acc45b8b9dac58452e12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 797080470}
+  _targetDistance: 10
+  _moveTimerMax: 100
+  _moveSpeed: 0
+  _maxSpeed: 5
+  _rayLengths:
+  - 8
+  - 8
+  - 8
+  _rays: 000000
+  _fleeing: 0
+  _inRange: 0
+  _climbing: 0
+  _rayOffsets:
+  - {x: -0.55, y: 0}
+  - {x: 0, y: -0.51}
+  - {x: 0.55, y: 0}
 --- !u!1 &512997056
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,13 +710,13 @@ GameObject:
   m_Component:
   - component: {fileID: 524496161}
   - component: {fileID: 524496158}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BossTrigger
   m_TagString: BossTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &524496158
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1031,7 +1073,7 @@ GameObject:
   - component: {fileID: 1266030629}
   - component: {fileID: 1266030632}
   - component: {fileID: 1266030633}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1064,7 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 797080470}
-  _extra: {x: 13, y: 0, z: 0}
+  _extra: {x: 0, y: 0, z: 0}
   shakeTimer: 0
   shakeAmout: 0
 --- !u!20 &1266030630
@@ -1320,7 +1362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &2125217274
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1435,7 +1477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108990eb041978949bce4d846b6d4dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  _health: 0
   _knockback: 2
 --- !u!50 &2125217280
 Rigidbody2D:

@@ -1,14 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health;
+    [Header("GameObjects")]
+    private GameObject _player;
+
+    [Header("Components")]
+    private Rigidbody2D _rb;
+
+    [Header("Numbers")]
+    [SerializeField]
+    private int _health;
     [SerializeField]
     private int _knockback;
-    private Rigidbody2D _rb;
-    private GameObject _player;
+    
+    [Header("Vectors")]
     private Vector2 _direction;
 
     void Start()
@@ -37,10 +43,14 @@ public class EnemyHealth : MonoBehaviour
         {
             GetComponent<BossMovement>().SlowDown();
         }
-        health -= damage;
-        if (health <= 0)
+        _health -= damage;
+        if (_health <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+    public int GetHealth()
+    {
+        return _health;
     }
 }

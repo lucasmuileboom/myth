@@ -42,7 +42,7 @@ public class Camera_Follow : MonoBehaviour
         {
             _bossCamera = true;
         }
-        if (other.gameObject.tag == "player" && _boss.GetComponent<EnemyHealth>().health == 0f)
+        if (other.gameObject.tag == "player" && _boss.GetComponent<EnemyHealth>().GetHealth() == 0f)
         {
             _bossCamera = false;
         }

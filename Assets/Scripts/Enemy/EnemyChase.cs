@@ -2,36 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// This script is part of the enemy movement, when activated, it will make the enemy chase the player
-/// </summary>
-
-[RequireComponent(typeof(EnemyMovement))]
-
 public class EnemyChase : MonoBehaviour
 {
     [Header("GameObjects")]
+    private GameObject _target;
 
-    [Header("Components")]
-
-    [Header("Ints and Floats")]
-    
     [Header("Bools")]
+    private bool _fleeing;
 
-    [Header("Vectors")]
+    [Header("Numbers")]
+    private float _maxSpeed;
+    private int _direction;
 
-
-    private EnemyMovement _movement;
-
-    void Start()
+    public void GetData(float maxSpeed, bool fleeing, GameObject target)
     {
-        _movement = GetComponent<EnemyMovement>();
+        _maxSpeed = maxSpeed;
+        _fleeing = fleeing;
+        _target = target;
     }
 
+    void FixedUpdate()
+    {
+        if (_fleeing)
+        {
+            _direction = -1;
+        }
+        else
+        {
+            _direction = 1;
+        }
+    }
 
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void ChaseObject(int targetDirection)
+    {
+        transform.position = new Vector2(transform.position.x + _maxSpeed * targetDirection * _direction * Time.deltaTime, transform.position.y);
+        print(_maxSpeed);
+    }
 }

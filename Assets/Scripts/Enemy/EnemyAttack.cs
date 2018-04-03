@@ -9,21 +9,12 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField]
-    private int _collisionTimer = 10;
-    private int _collisionTime = 0;
+    [Header("Numbers")]
     [SerializeField]
     private int _damage = 1;
-
-	// Use this for initialization
-	void Start() {
-		
-	}
-	
-	// Update is called once per frame
-	void Update() {
-		
-	}
+    [SerializeField]
+    private int _collisionTimer = 10;
+    private int _collisionTime = 0;  
 
     void OnCollisionStay2D(Collision2D other)
     {
@@ -46,6 +37,4 @@ public class EnemyAttack : MonoBehaviour
             _collisionTime = 0;
         }
     }
-
-
 }
