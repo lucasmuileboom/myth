@@ -48,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
             Attack(2, false);
         }
     }
-    void Attack(int i, bool melee)
+    private void Attack(int i, bool melee)
     {
         if (_timer < 0 && !_chargeAttack)
         {

@@ -25,7 +25,6 @@ public class Platform : MonoBehaviour
             {
                 _goDown = true;
                 GetComponent<BoxCollider2D>().enabled = false;
-                print("down");
             }
             else
             {

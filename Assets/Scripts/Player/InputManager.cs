@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
-{//moet down nog testen op controller
+{   //moet down nog testen op controller
+    // moet escape controller fixe
+    private Pause_script _Pause_script;
     public bool left()
     {
         if (Input.GetAxisRaw("Horizontal") < -0.25f || Input.GetKey(KeyCode.A))
@@ -83,5 +85,25 @@ public class InputManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public bool menu()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            return true;
+        }
+        return false;
+    }
+    void Start()
+    {
+        _Pause_script = GameObject.Find("pausescreen").GetComponent<Pause_script>();
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))//moet nog controler input
+        {
+            _Pause_script.PauseControl();
+        }
+       
     }
 }

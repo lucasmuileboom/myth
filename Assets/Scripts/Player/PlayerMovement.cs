@@ -117,14 +117,12 @@ public class PlayerMovement : MonoBehaviour
         _isFlipped = true;
         _timer = _dodgeCoolDown;
         _moveSpeedCurrent -= _dodgeSpeed;
-        print("dodgeL");
     }
     private void DodgeRight()
     {
         _isFlipped = false;
         _timer = _dodgeCoolDown;
         _moveSpeedCurrent += _dodgeSpeed;
-        print("dodgeR");
     }
     private void ResetJump()
     {
@@ -134,7 +132,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator Jump()
     {
-        print("j");
         _jump = true;
         _holdjump = true;
         float startpositionY = transform.position.y;
@@ -147,7 +144,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void DoubleJump()
     {
-        print("dj");
         _jumpForceCurrent += _doubleJumpForce;
         _douleJump = true;
     }
