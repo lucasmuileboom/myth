@@ -29,8 +29,8 @@ public class Pause_script : MonoBehaviour {
         }
         else if (Time.timeScale == 0)
         {
-           Time.timeScale = 1;
-           hidePause();
+            Time.timeScale = 1;
+            hidePause();
         }
     }
 
