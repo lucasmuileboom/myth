@@ -8,91 +8,43 @@ public class InputManager : MonoBehaviour
     private Pause_script _Pause_script;
     public bool left()
     {
-        if (Input.GetAxisRaw("Horizontal") < -0.25f || Input.GetKey(KeyCode.A))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetAxisRaw("Horizontal") < -0.25f || Input.GetKey(KeyCode.A);
     }
     public bool right()
     {
-        if (Input.GetAxisRaw("Horizontal") > 0.25f || Input.GetKey(KeyCode.D))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetAxisRaw("Horizontal") > 0.25f || Input.GetKey(KeyCode.D);
     }
     public bool down()
     {
-        if (Input.GetAxisRaw("Vertical") > 0.25f || Input.GetKeyDown(KeyCode.S))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetAxisRaw("Vertical") > 0.25f || Input.GetKeyDown(KeyCode.S);
     }
     public bool jump()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.W))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.W);
     }
     public bool holdjump()
     {
-        if (Input.GetKey(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.W))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKey(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.W);
     }
     public bool lightAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.N))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.N);
     }
     public bool heavyAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.M))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKeyDown(KeyCode.Joystick1Button3) || Input.GetKeyDown(KeyCode.M);
     }
     public bool rangeAttack()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.K))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKeyDown(KeyCode.Joystick1Button2) || Input.GetKeyDown(KeyCode.K);
     }
     public bool holdRangeAttack()
     {
-        if (Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.K))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKey(KeyCode.Joystick1Button2) || Input.GetKey(KeyCode.K);
     }
     public bool dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            return true;
-        }
-        return false;
-    }
-    public bool menu()
-    {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            return true;
-        }
-        return false;
+        return Input.GetKeyDown(KeyCode.Joystick1Button4) || Input.GetKeyDown(KeyCode.LeftShift);
     }
     void Start()
     {
