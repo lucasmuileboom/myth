@@ -5,7 +5,6 @@ using UnityEngine;
 public class Main_Menu_UI : MonoBehaviour {
 
     GameObject[] menuObjects;
-    public bool main = true;
 
     void Start()
     {
@@ -13,33 +12,19 @@ public class Main_Menu_UI : MonoBehaviour {
         showMain();
     }
 
-    public void mainControl()
-    {
-        if (!main)
-        {
-            showMain();
-        }
-        else if (main)
-        {
-            hideMain();
-        }
-    }
-
-    void showMain()
+    public void showMain()
     {
         foreach (GameObject g in menuObjects)
         {
             g.SetActive(true);
         }
-        main = true;
     }
 
-    void hideMain()
+    public void hideMain()
     {
         foreach (GameObject g in menuObjects)
         {
             g.SetActive(false);
         }
-        main = false;
     }
 }
