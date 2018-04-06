@@ -25,7 +25,9 @@ public class EnemyBase : MonoBehaviour
 {
     [Header("GameObjects")]
     [SerializeField]
-    private GameObject _target; 
+    private GameObject _target;
+    [SerializeField]
+    private GameObject _pickup;
 
     [Header("Components")]
     private BoxCollider2D _col;
@@ -49,7 +51,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     private bool[] _rays = { };
     [SerializeField]
-    private bool _fleeing;
+    private bool _hasPickup;
     [SerializeField]private bool _inRange, _climbing;
 
     [Header("Vectors")]
@@ -72,7 +74,7 @@ public class EnemyBase : MonoBehaviour
         _rb.freezeRotation = true;
         _checkSur.GetData(_target, _targetDistance);
         _movement.GetData(_target, _rb, _chase, _maxSpeed, _moveTimerMax);
-        _chase.GetData(_maxSpeed, _fleeing, _target);
+        _chase.GetData(_maxSpeed, _hasPickup, _target);
     }
 	
 	// Update is called once per frame
@@ -94,6 +96,15 @@ public class EnemyBase : MonoBehaviour
     void LateUpdate ()
     {
         _climbing = false;
+    }
+
+    void OnDestroy()
+    {
+        if (_hasPickup)
+        {
+            GameObject p = Instantiate<GameObject>(_pickup);
+            p.transform.position = this.transform.position;
+        }
     }
 }
 /*

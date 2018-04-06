@@ -16,25 +16,10 @@ public class EnemyAttack : MonoBehaviour
     private int _collisionTimer = 10;
     private int _collisionTime = 0;  
 
-    void OnCollisionStay2D(Collision2D other)
+    public void Attack(GameObject target)
     {
-        if (other.collider.tag == "Player")
-        {
-            _collisionTime ++;
-        }
-        if (_collisionTime >= _collisionTimer)
-        {
-            Debug.Log("Attacking NOW");
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(_damage);
-            _collisionTime = 0;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.collider.tag == "Player")
-        {
-            _collisionTime = 0;
-        }
+        Debug.Log("Attacking NOW");
+        target.gameObject.GetComponent<PlayerHealth>().TakeDamage(_damage);
+        _collisionTime = 0;
     }
 }

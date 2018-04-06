@@ -14,10 +14,10 @@ public class EnemyChase : MonoBehaviour
     private float _maxSpeed;
     private int _direction;
 
-    public void GetData(float maxSpeed, bool fleeing, GameObject target)
+    public void GetData(float maxSpeed, bool hasPickup, GameObject target)
     {
         _maxSpeed = maxSpeed;
-        _fleeing = fleeing;
+        _fleeing = hasPickup;
         _target = target;
     }
 
@@ -36,6 +36,5 @@ public class EnemyChase : MonoBehaviour
     public void ChaseObject(int targetDirection)
     {
         transform.position = new Vector2(transform.position.x + _maxSpeed * targetDirection * _direction * Time.deltaTime, transform.position.y);
-        print(_maxSpeed);
     }
 }
