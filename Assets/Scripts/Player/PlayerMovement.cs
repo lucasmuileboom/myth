@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private SpriteRenderer _SpriteRenderer;
-    private Animator _Animator;
     private InputManager _inputManager;
     private Rigidbody2D _rigidbody;
     [SerializeField]private LayerMask groundLayer;
@@ -32,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool IsGrounded()
     {
-        float distance = 0.2f;
-        Debug.DrawRay(transform.position, Vector2.down * distance, Color.green);
+        float distance = 0.7f;
+        Debug.DrawRay(transform.position, Vector2.down, Color.green);
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distance, groundLayer);
         if (hit.collider != null)
         {
@@ -49,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _inputManager = GetComponent<InputManager>();
-        _Animator = GetComponent<Animator>();
-        _SpriteRenderer = GetComponent<SpriteRenderer>();
     }
     void FixedUpdate()
     {
@@ -96,13 +92,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Idle()
     {
-        _Animator.SetBool("run", false);
         _moveSpeedCurrent = 0;
     }
     private void Left()
     {
-        _Animator.SetBool("run", true);
-        _SpriteRenderer.flipX = true;
         _isFlipped = true;
         _moveSpeedCurrent -= _Speed;
         if (_moveSpeedCurrent <= -_SpeedMax)
@@ -112,8 +105,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Right()
     {
-        _Animator.SetBool("run", true);
-        _SpriteRenderer.flipX = false;
         _isFlipped = false;
         _moveSpeedCurrent += _Speed;
         if (_moveSpeedCurrent >= _SpeedMax)
@@ -123,14 +114,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void DodgeLeft()
     {
-        _SpriteRenderer.flipX = true;
         _isFlipped = true;
         _timer = _dodgeCoolDown;
         _moveSpeedCurrent -= _dodgeSpeed;
     }
     private void DodgeRight()
     {
-        _SpriteRenderer.flipX = false;
         _isFlipped = false;
         _timer = _dodgeCoolDown;
         _moveSpeedCurrent += _dodgeSpeed;
