@@ -32,17 +32,21 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool IsGrounded()
     {
-        float distance = 0.2f;
-        Debug.DrawRay(transform.position, Vector2.down * distance, Color.green);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, distance, groundLayer);
+        float distance = 0.1f;
+        Debug.DrawRay(transform.position + new Vector3(0.8f, 0, 0), Vector2.down * distance, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.8f,0,0), Vector2.down, distance, groundLayer);
         if (hit.collider != null)
         {
             return true;
         }
-        else
+        Debug.DrawRay(transform.position - new Vector3(0.9f, 0, 0), Vector2.down * distance, Color.green);
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position - new Vector3(0.9f, 0, 0), Vector2.down, distance, groundLayer);
+        if (hit1.collider != null)
         {
-            return false;
-        }        
+            return true;
+        }
+        return false;
+
     }
     
     void Start()
@@ -137,12 +141,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void ResetJump()
     {
+        _Animator.SetBool("jump", false);
         _jump = false;
         _douleJump = false;
         _jumpForceCurrent = 0;
     }
     private IEnumerator Jump()
     {
+        _Animator.SetBool("jump", true);
         _jump = true;
         _holdjump = true;
         float startpositionY = transform.position.y;
