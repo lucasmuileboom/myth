@@ -27,15 +27,25 @@ public class EnemyCheckSurroundings : MonoBehaviour
             return -1;
     }
 
+    public bool IsGrounded()
+    {
+        Vector2 offset = new Vector2(transform.position.x - 1f, transform.position.y - 4.5f);
+        RaycastHit2D hit = Physics2D.Raycast(offset, Vector2.down, 2f);
+        Debug.DrawRay(offset, Vector2.right * 2f, Color.green);
+        if (hit && hit.collider.tag == "Platform")
+            return true;
+        else
+            return false;
+    }
 
     public bool CheckPos(bool ray, Vector2 offset, float length)
     {
-        offset = new Vector2(transform.position.x + offset.x, transform.position.y + offset.y);
+        offset = new Vector2(transform.position.x + offset.x, transform.position.y + offset.y);//(Vector2) transform.position + offset
         RaycastHit2D hit = Physics2D.Raycast(offset, Vector2.down, length);
         Debug.DrawRay(offset, Vector2.down * length, Color.red);
         if (hit && hit.collider.tag == "Platform")
         {
-            if (hit.point.y > transform.position.y - 0.5f)
+            if (hit.point.y > transform.position.y - 4f)
                 _move.Climb();
             else
                 ray = true; 
