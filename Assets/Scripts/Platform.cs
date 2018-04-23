@@ -27,7 +27,7 @@ public class Platform : MonoBehaviour
             }
             else
             {
-               // Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<Collider2D>(), GetComponent<Collider2D>(),false);
+                //Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<Collider2D>(), GetComponent<Collider2D>(),false);
                 GetComponent<BoxCollider2D>().enabled = true;
                 gameObject.layer = 8;
             }
@@ -35,7 +35,7 @@ public class Platform : MonoBehaviour
         else if (_Player.transform.position.y < transform.position.y)
         {
             _goDown = false;
-           // Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            //Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<Collider2D>(), GetComponent<Collider2D>());
             GetComponent<BoxCollider2D>().enabled = false;
             gameObject.layer = 0;
         }
