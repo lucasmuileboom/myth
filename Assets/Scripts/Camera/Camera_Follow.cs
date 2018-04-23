@@ -88,5 +88,6 @@ public class Camera_Follow : MonoBehaviour
     {
         _player = target;
         _extra = pos;
+        _offset = transform.position - _player.transform.position + _extra;
     }
 }
