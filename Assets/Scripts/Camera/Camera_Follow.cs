@@ -83,4 +83,10 @@ public class Camera_Follow : MonoBehaviour
             _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 15f, 0.2f);
         }
     }
+
+    public void GetTarget(GameObject target, Vector3 pos)
+    {
+        _player = target;
+        _extra = pos;
+    }
 }
