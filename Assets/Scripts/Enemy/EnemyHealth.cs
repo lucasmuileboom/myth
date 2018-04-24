@@ -17,7 +17,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _player = GameObject.Find("player");
+        _player = GameObject.Find("Player");
     }
 
     public void TakeDamage(int damage)

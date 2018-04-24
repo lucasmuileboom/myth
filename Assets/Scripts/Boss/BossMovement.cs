@@ -19,10 +19,13 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private bool _active;
     [SerializeField] private bool _resting;
     [SerializeField] private bool _clearEnemies;
+    private float _heightOffset;
     private bool _moving;
     private bool _started;
     private GameObject[] _platforms;
+    private GameObject _player;
     private BossAttack _bossAttack;
+    private float _startHeight;
 
     // Use this for initialization
     void Start()
@@ -33,12 +36,14 @@ public class BossMovement : MonoBehaviour
         _minSpeed *= _rescaleValue;
         _maxSpeed *= _rescaleValue;
         _slowDown *= _rescaleValue;
+        _player = GameObject.Find("Player");
         _platforms = GameObject.FindGameObjectsWithTag("Platform");
         for (int i = 0; i < _platforms.Length; i++)
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), _platforms[i].GetComponent<Collider2D>());
         }
         _bossAttack = GetComponent<BossAttack>();
+        _startHeight = transform.position.y;
     }
 
     // Update is called once per frame
@@ -53,9 +58,13 @@ public class BossMovement : MonoBehaviour
             MoveBoss();
             if (!_started)
             {
+                
                 StartCoroutine("Startup");
             }
         }
+        _heightOffset = _player.transform.position.y - _startHeight;
+        transform.position = new Vector2(transform.position.x, _startHeight + (_heightOffset/4));
+       
     }
 
     void MoveBoss()
@@ -81,6 +90,11 @@ public class BossMovement : MonoBehaviour
             _bossAttack.StartCoroutine(_bossAttack.Attack());
             _attackTime = 0;
         }
+    }
+
+    void OnDestroy()
+    {
+        GameObject.Find("Main Camera").GetComponent<Camera_Follow>().GetTarget(_player, new Vector3(0f, 0f, 0f));
     }
 
     public void ActivateBoss()

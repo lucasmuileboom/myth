@@ -16,7 +16,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     private GameObject _pickup;
 
-    private Timer _moveTimer, _attackTimer;
+    private Timer _moveTimer, _attackTimer, _coolDown;
 
     private BoxCollider2D _col;
     private Rigidbody2D _rb;
@@ -40,6 +40,7 @@ public class EnemyBase : MonoBehaviour
     [Header("Bools")]
     [SerializeField]
     private bool[] _rays = { };
+    [SerializeField]
     private bool _hasPickup, _attacking;
 
     [Header("Vectors")]
@@ -50,7 +51,7 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         if (!_target)
-            _target = GameObject.Find("player");
+            _target = GameObject.Find("Player");
 
         Physics2D.IgnoreCollision(_target.GetComponent<Collider2D>(), this.GetComponent<Collider2D>());
         _col = GetComponent<BoxCollider2D>();
@@ -62,6 +63,7 @@ public class EnemyBase : MonoBehaviour
         _rb.freezeRotation = true;
         _moveTimer = new Timer(2.5f);
         _attackTimer = new Timer(-1);
+        _coolDown = new Timer(1);
     }
 	
 	// Update is called once per frame
@@ -81,7 +83,7 @@ public class EnemyBase : MonoBehaviour
         if (_checkSur.CheckDistance(_attackRange, _target))
         {
             _moveDir = 0;
-            if (!_attacking)
+            if (!_attacking && _coolDown.Done())
                 Attack();
         }
             
@@ -90,6 +92,8 @@ public class EnemyBase : MonoBehaviour
             print("Attacking");
             _attack.Attack(_target);
             _attacking = false;
+            _coolDown = new Timer(0.5f);
+            print("Attacked");
         }
 
         for (int i = 0; i < _rays.Length; i++)
@@ -134,10 +138,7 @@ public class EnemyBase : MonoBehaviour
             _lastDir = _moveDir;
         }
 
-        if (Mathf.Abs(_moveSpeed) > 1 && _checkSur.IsGrounded())
-            _anim.SetSpeed(1.5f);
-        else
-            _anim.SetSpeed(0f);
+        _anim.Attacking(_attacking);
     }
 
     void OnDestroy()

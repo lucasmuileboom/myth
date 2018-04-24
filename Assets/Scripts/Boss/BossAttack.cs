@@ -22,4 +22,12 @@ public class BossAttack : MonoBehaviour {
         }
         yield return null;
     }	
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(5);
+        }
+    }
 }

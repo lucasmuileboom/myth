@@ -9,7 +9,7 @@ public class Pause_script : MonoBehaviour {
 	void Start () {
         Time.timeScale = 1;
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPaused");
-        hidePause();
+        HidePause();
 	}
 
     void Update()
@@ -25,16 +25,16 @@ public class Pause_script : MonoBehaviour {
         if (Time.timeScale > 0)
         {
             Time.timeScale = 0;
-            showPaused();
+            ShowPaused();
         }
-        else if (Time.timeScale == 0)
+        else if (Time.timeScale <= 0)
         {
             Time.timeScale = 1;
-            hidePause();
+            HidePause();
         }
     }
 
-    public void showPaused()
+    public void ShowPaused()
     {
         foreach (GameObject g in pauseObjects)
         {
@@ -42,7 +42,7 @@ public class Pause_script : MonoBehaviour {
         }
     }
 
-    public void hidePause()
+    public void HidePause()
     {
         foreach (GameObject g in pauseObjects)
         {

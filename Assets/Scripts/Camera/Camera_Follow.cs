@@ -54,13 +54,13 @@ public class Camera_Follow : MonoBehaviour
         {
             this.transform.position = _player.transform.position + _offset;
             _mainCamera.enabled = true;
-            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 5f, 0.2f);
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 18f, 0.2f);
         }
         else if (_reach && !_bossCamera)
         {
             this.transform.position = new Vector3(_player.transform.position.x + _extra.x, this.transform.position.y, this.transform.position.z);
             _mainCamera.enabled = true;
-            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 5f, 0.2f);
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 18f, 0.2f);
             if (this.transform.position.y > _player.transform.position.y)
             {
                 _reach = false;
@@ -70,7 +70,7 @@ public class Camera_Follow : MonoBehaviour
         {
             this.transform.position = new Vector3(_player.transform.position.x + _extra.x, this.transform.position.y, this.transform.position.z);
             _mainCamera.enabled = true;
-            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 5f, 0.2f);
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 18f, 0.2f);
             if (this.transform.position.y < _player.transform.position.y)
             {
                 _low = false;
@@ -78,9 +78,9 @@ public class Camera_Follow : MonoBehaviour
         }
         if (_bossCamera)
         {
-            this.transform.position = new Vector3(_boss.transform.position.x - _extra.x, this.transform.position.y, this.transform.position.z);
+            this.transform.position = new Vector3(_boss.transform.position.x - _extra.x, _boss.transform.position.y, this.transform.position.z);
             _mainCamera.enabled = true;
-            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 15f, 0.2f);
+            _mainCamera.orthographicSize = Mathf.Lerp(_mainCamera.orthographicSize, 30f, 0.2f);
         }
     }
 
@@ -88,6 +88,5 @@ public class Camera_Follow : MonoBehaviour
     {
         _player = target;
         _extra = pos;
-        _offset = transform.position - _player.transform.position + _extra;
     }
 }
