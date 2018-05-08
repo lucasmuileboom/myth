@@ -32,6 +32,11 @@ public class Paralaxing : MonoBehaviour {
         transform.position += Vector3.right * (deltaX * paralaxSpeed);
         _lastCameraX = _cameraTransform.position.x;
 
+        foreach (Transform f in _layers)
+        {
+            f.position = new Vector3(f.position.x, _cameraTransform.position.y, f.position.z);
+        }
+
         if (_cameraTransform.position.x < (_layers[_leftIndex].transform.position.x + _viewZone))
             LeftScroll();
 
