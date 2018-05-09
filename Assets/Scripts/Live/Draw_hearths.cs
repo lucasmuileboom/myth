@@ -16,13 +16,13 @@ public class Draw_hearths : MonoBehaviour {
         _lastIndex = _Lives.Length - 1;
     }
 
-    void AwakeHearth()
+    public void AwakeHearth()
     {
         _lastIndex++;
         _Lives[_lastIndex].gameObject.SetActive(true);
     }
 
-    void HideHearth()
+    public void HideHearth()
     {
         _Lives[_lastIndex].gameObject.SetActive(false);
         _lastIndex--;
