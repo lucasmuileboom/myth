@@ -8,10 +8,10 @@ public class Options_script : MonoBehaviour {
 
 	void Start () {
         optionObjects = GameObject.FindGameObjectsWithTag("ShowOnOptions");
-        hideOption();
+        HideOption();
     }
 	
-    public void showOption()
+    public void ShowOption()
     {
         foreach(GameObject g in optionObjects)
         {
@@ -19,7 +19,7 @@ public class Options_script : MonoBehaviour {
         }
     }
 
-    public void hideOption()
+    public void HideOption()
     {
         foreach(GameObject g in optionObjects)
         {

@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return _isFlipped;
     }
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         float distance = 0.1f;
         Debug.DrawRay(transform.position + new Vector3(0.8f, 0, 0), Vector2.down * distance, Color.green);

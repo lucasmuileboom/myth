@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private Animator _Animator;
     private InputManager _inputManager;
     private PlayerMovement _PlayerMovement;
     [SerializeField]private LayerMask _enemysLayer;
@@ -30,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
+        _Animator = GetComponent<Animator>();
         _inputManager = GetComponent<InputManager>();
         _PlayerMovement = GetComponent<PlayerMovement>();
         _offset = new Vector3(0, _yOffset,0);
@@ -37,23 +39,28 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         _timer -= Time.deltaTime;
+        _Animator.SetBool("Lattack", false);
+        _Animator.SetBool("Hattack", false);
+        _Animator.SetBool("Rattack", false);
         if (_inputManager.lightAttack())
         {
             Attack(0, true);
-
+            _Animator.SetBool("Lattack", true);
         }
         else if (_inputManager.heavyAttack())
         {
             Attack(1, true);
+            _Animator.SetBool("Hattack", true);
         }
         else if (_inputManager.rangeAttack())
         {
             Attack(2, false);
+            _Animator.SetBool("Rattack", true);
         }
     }
     private void Attack(int i, bool melee)
     {
-        if (_timer < 0 && !_chargeAttack)
+        if (_timer < 0 && !_chargeAttack && _PlayerMovement.IsGrounded())
         {
             if (_PlayerMovement.IsFlipped())
             {
@@ -112,5 +119,6 @@ public class PlayerAttack : MonoBehaviour
         projectile.GetComponent<Projectile>().damage = _projectileDamage;
         _chargeAttack = false;
         _timer = Attacks[2].FireRate;
+        //_Animator.SetBool("Rattack", false);
     }
 }

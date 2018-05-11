@@ -13,6 +13,11 @@ public class Projectile : MonoBehaviour
     }
     private float _damage;
 
+    void Awake()
+    {
+        Physics2D.IgnoreCollision(GameObject.Find("Player").GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>());
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Enemy")

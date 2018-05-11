@@ -6,6 +6,7 @@ public class Platform : MonoBehaviour
 {
     private InputManager _inputManager;
     private GameObject _Player;
+   // private float _playerHeight;
    [SerializeField]private float _platformHeight;
     private bool _goDown;
 
@@ -13,6 +14,8 @@ public class Platform : MonoBehaviour
     {
         _Player = GameObject.Find("Player");
         _inputManager = _Player.GetComponent<InputManager>();
+        //_playerHeight = _Player.transform.lossyScale.y / 2;
+        //_platformHeight = transform.lossyScale.y / 2;
     }
 	void Update ()
     {

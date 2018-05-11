@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
     }
     void Start()
     {
-        _Pause_script = GameObject.Find("pausescreen").GetComponent<Pause_script>();
+        _Pause_script = GameObject.Find("_GM").GetComponent<Pause_script>();
     }
     void Update()
     {

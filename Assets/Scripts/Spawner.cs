@@ -17,18 +17,19 @@ public class Spawner : MonoBehaviour
     private float _offset = 11;
     private int _randDir;
     [SerializeField]
-    private bool _deployed = false;
+    private bool _deployed, _done;
 
     void Start()
     {
         Randomize();
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.collider.tag == "Player" && !_deployed)
+        if (other.tag == "Player" && !_deployed)
         {
             _deployed = true;
+            GameObject.Find("Main Camera").GetComponent<Camera_Follow>().GetTarget(this.gameObject, new Vector3(0f, 0f, 0f));
             _timer = new Timer(_time);
         }
     }
@@ -52,9 +53,11 @@ public class Spawner : MonoBehaviour
                     Instantiate(_enemy, new Vector2(transform.position.x + _offset * _randDir, transform.position.y), Quaternion.identity);
                 }
             }
-            if (_amount <= 0)
+            if (_amount <= 0 && !_done)
             {
+                _done = true;
                 print("Done");
+                GameObject.Find("Main Camera").GetComponent<Camera_Follow>().GetTarget(GameObject.Find("Player"), new Vector3(0f, 0f, 0f));
             }
         }   
     }
